@@ -1,7 +1,9 @@
+// shixun_frontend/src/services/api.js
+
 import axios from 'axios'
 
 const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: '/api', // 这样才能触发 vue.config.js 中的代理
   headers: {
     'Content-Type': 'application/json'
   }
@@ -15,4 +17,6 @@ export const getTrueTripleVideos = (params) => apiClient.get('/true-triple-video
 export const getMonthlyPlayTrend = (params) => apiClient.get('/monthly-play-trend', { params })
 export const getNicheUps = (params) => apiClient.get('/niche-ups', { params })
 export const getReleaseTimeImpact = (params) => apiClient.get('/release-time-impact', { params })
-export const getTagPlayStats = (params) => apiClient.get('/tag-play-stats', { params }) 
+export const getTagPlayStats = (params) => apiClient.get('/tag-play-stats', { params })
+
+export const getTestApi = () => apiClient.get('/testApi'); // <-- 将 'api' 修改为 'apiClient'
