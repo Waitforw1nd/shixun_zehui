@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>高校毕业生就业数据可视化分析</title>
+    <!--	<meta http-equiv="refresh" content="50;url='https://blog.csdn.net/qq_31766533/article/details/119274641'">-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" href="css/comon0.css">
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script language="JavaScript" src="js/js.js"></script>
+</head>
+
+<body>
+<div class="loading">
+    <div class="loadbox"> <img src="images/loading.gif"> 页面加载中... </div>
+</div>
+<div class="head">
+    <h1>高校毕业生就业数据可视化分析</h1>
+    <div class="time" id="showTime"></div>
+    <script>
+        var t = null;
+        t = setTimeout(time, 1000);//開始运行
+        function time() {
+            clearTimeout(t);//清除定时器
+            dt = new Date();
+            var y = dt.getFullYear();
+            var mt = dt.getMonth() + 1;
+            var day = dt.getDate();
+            var h = dt.getHours();//获取时
+            var m = dt.getMinutes();//获取分
+            var s = dt.getSeconds();//获取秒
+            var t = null;
+            document.getElementById("showTime").innerHTML = y + "年" + Appendzero(mt) + "月" + Appendzero(day) + "日" + Appendzero(h) + "时" + Appendzero(m) + "分" + Appendzero(s) + "秒";
+            function Appendzero(obj) {
+                if (obj < 10) return "0" + "" + obj;
+                else return obj;
+            }
+            t = setTimeout(time, 1000); //设定定时器，循环运行
+        }
+    </script>
+</div>
+<div class="mainbox">
+    <ul class="clearfix">
+        <li>
+
+            <div class="boxall" style="height: calc(33.33% - .15rem)">
+                <div class="alltitle">不同专业人数对比</div>
+                <div class="boxnav h100" id="echarts1"></div>
+            </div>
+            <div class="boxall" style="height: calc(33.33% - .15rem)">
+                <div class="alltitle">各专业薪资对比</div>
+                <div class="boxnav h100" id="echarts11"></div>
+            </div>
+            <div class="boxall" style="height: calc(33.33% - .15rem)">
+                <div class="alltitle">各专业就业满意度分析</div>
+                <div class="boxnav h100" id="echarts111"></div>
+            </div>
+
+
+        </li>
+
+        <li>
+            <div class="boxall" style="height: calc(50% - .15rem)">
+                <ul class="row h100 row1">
+                    <li class="col-6">
+                        <div class="bar1" id="echarts21">
+
+                        </div>
+                    </li>
+                    <li class="col-6">
+                        <div class="bar1" id="echarts22">
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="boxall" style="height: calc(50% - .15rem)">
+                <ul class="row h100 row1">
+                    <li class="col-6">
+                        <div class="boxnav" id="echarts23">
+
+                        </div>
+                    </li>
+                    <li class="col-6">
+                        <div class="boxnav" id="echarts24">
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+
+        <li>
+
+            <div class="boxall" style="height: calc(25% - .15rem)">
+                <div class="alltitle">每个大类下子类的数量</div>
+                <div class="boxnav h100" id="echarts31"></div>
+            </div>
+            <div class="boxall" style="height: calc(25% - .15rem)">
+                <div class="alltitle">商品每个大类的销量情况</div>
+                <div class="boxnav h100" id="echarts32"></div>
+            </div>
+            <div class="boxall" style="height: calc(25% - .15rem)">
+                <div class="alltitle">大类下每个子类的平均销售贡献</div>
+                <div class="boxnav h100" id="echarts33"></div>
+            </div>
+            <div class="boxall" style="height: calc(25% - .15rem)">
+                <div class="alltitle">热门子类:销量和用户数都在前10名</div>
+                <div class="boxnav h100" id="echarts34"></div>
+            </div>
+
+
+        </li>
+
+
+
+
+    </ul>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var arr = [];
+        var max;
+        $(".paim li i").each(function () {
+            arr.push($(this).text());
+        })
+        //alert(arr)
+        max = Math.max.apply(null, arr);
+
+        $(".paim .pmbar span").each(function () {
+            var i = $(this).parents("li").index()
+            w = arr[i] / max * 100;
+            sw = w.toFixed(0) + '%'
+
+            $(this).css({ width: sw })
+        })
+
+    })
+</script>
+
+
+
+</body>
+</html>
